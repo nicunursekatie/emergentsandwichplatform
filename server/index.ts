@@ -65,9 +65,10 @@ async function startServer() {
       res.status(status).json({ message });
     });
 
-    // Start listening immediately on port 5000
+    // Start listening immediately on port 5000 (for local development)
+    // In production, Vercel will handle the port configuration
     const port = process.env.PORT || 5000;
-    const host = "0.0.0.0";
+    const host = process.env.VERCEL ? "0.0.0.0" : "0.0.0.0";
 
     const httpServer = app.listen(port, host, async () => {
       console.log(`✓ Server is running on http://${host}:${port}`);
